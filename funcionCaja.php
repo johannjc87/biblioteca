@@ -36,87 +36,25 @@
           <li class="nav-item">
             <a class="nav-link" href="index.php">
               <i class="material-icons">dashboard</i>
-              <p>Dashboard</p>
+              <p>Centro de Mando</p>
             </a>
           </li>
           <li class="nav-item active ">
-            <a class="nav-link" href="sistema.php">
+            <a class="nav-link" href="funcionaSalario.php">
               <i class="material-icons">perm_identity</i>
-              <p>Autores</p>
+              <p>Función: Calculo ISLR</p>
             </a>
           </li>
           <li class="nav-item active ">
-            <a class="nav-link" href="sistemaEditorial.php">
+            <a class="nav-link" href="funcionCaja.php">
               <i class="material-icons">account_balance</i>
-              <p>Editorial</p>
+              <p>Función: Calculo Caja</p>
             </a>
           </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaSede.php">
-              <i class="material-icons">location_on</i>
-              <p>Sede</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaFuncionario.php">
-              <i class="material-icons">portrait</i>
-              <p>Funcionario</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaEstudiante.php">
-              <i class="material-icons">portrait</i>
-              <p>Estudiantes</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaModificados.php">
-              <i class="material-icons">portrait</i>
-              <p>Modificados</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaCorreo.php">
-              <i class="material-icons">email</i>
-              <p>Correo Est.</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaTelefono.php">
-              <i class="material-icons">local_phone</i>
-              <p>Telefono Est.</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaLibro.php">
-              <i class="material-icons">menu_book</i>
-              <p>Libro</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaPrestamo.php">
-              <i class="material-icons">beenhere</i>
-              <p>Prestamo</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaObsoleto.php">
-              <i class="material-icons">folder_delete</i>
-              <p>Libros Obsoletos</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaEspera.php">
-              <i class="material-icons">hourglass_empty</i>
-              <p>Lista de Espera</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaRegistro.php">
-              <i class="material-icons">app_registration</i>
-              <p>Registro</p>
-            </a>
-          </li>
+          
+         
+         
+
         </ul>
       </div>
     </div>
@@ -198,73 +136,52 @@
              <!-- Muestrea de datos  -->
              <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Datos Modificados de Estudiante</h4>
+                  <h4 class="card-title ">Función: Pago de CSS</h4>
                   <p class="card-category"> </p>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
                     <table class="table">
                       <thead class=" text-primary">
-                        
                         <th>
-                          ID Estudiante
+                          ID Funcionario
                         </th>
                         <th>
-                          Nombre Estudiante
+                          Nombre Funcionario
                         </th>                       
                         <th>
-                          Usuario
-                        </th>   
-                        <th>
-                          Contraseña
-                        </th>     
-                        <th>
-                          Dirección
-                        </th>  
-                        <th>
-                          Fecha de Registro
+                          Salario
                         </th>    
                         <th>
-                          Fecha de Modificación
-                        </th>                  
-                                     
-                        
+                          Calculo CSS
+                        </th>                      
+                                          
+                       
                       </thead>
                       <tbody>
                         <?php 
                         	include 'conexion.php';
-                            $stid = oci_parse($conexion, 'SELECT * from MODIFICADOS');
+                            $stid = oci_parse($conexion, 'SELECT ID_FUNCIONARIO, NOMBRE_FUNCIONARIO, SALARIO, CSS(SALARIO) from FUNCIONARIO');
                             oci_execute($stid);
                             while (($d = oci_fetch_array($stid, OCI_BOTH)) != false) {
                                 ?>
                             <tr>
-                              
+                             
                               <td>
-                                <?php echo $d['ID_ESTUDIANTE']; ?>
+                                <?php echo $d['ID_FUNCIONARIO']; ?>
                               </td>
                               <td>
-                                <?php echo $d['NOMBRE_ESTUDIANTE']; ?>
+                                <?php echo $d['NOMBRE_FUNCIONARIO']; ?>
                               </td>
                               <td>
-                                <?php echo $d['USUARIO']; ?>
+                                <?php echo $d['SALARIO']; ?>
                               </td>
                               <td>
-                              <?php echo $d['CONTRASENA']; ?>
+                                <?php echo $d['CSS(SALARIO)']; ?>
                               </td>
-                              <td>
-                                <?php echo $d['DIRECCION']; ?>
-                              </td>
-                              <td>
-                                <?php echo $d['FECHA_REGISTRO']; ?>
-                              </td>
-                              <td>
-                                <?php echo $d['MODIFICACION']; ?>
-                              </td>
-                              
-                              
                               <td class="td-actions">
 						 
-							
+						
                           </td>
                         </tr>
                       </tbody>

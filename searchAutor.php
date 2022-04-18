@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Biblioteca Tecnólogica
+   Biblioteca
   </title>
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -18,15 +18,22 @@
   <link href="assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="assets/demo/demo.css" rel="stylesheet" />
+
+  <style type="text/css">
+  h6 {   margin: 20px;}
+  h2 {   margin: 20px;}
+  .row {margin: 12px;}
+</style>
+
 </head>
 
 <body class="">
   <div class="wrapper ">
-    <div class="sidebar" data-color="green" data-background-color="white" data-image="assets/img/sidebar-1.jpg">
+    <div class="sidebar" data-color="azure" data-background-color="white" data-image="assets/img/sidebar-1.jpg">
       <!--
-        Tip 1: Se puede cambiar el color de la barra lateral data-color="purple | azure | green | orange | danger"
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
-        Tip 2: Se puede agregar una imagen usando  data-image tag
+        Tip 2: you can also add an image using data-image tag
     -->
       <div class="logo"><a href="http://www.creative-tim.com" class="simple-text logo-normal">
           Biblioteca
@@ -40,88 +47,24 @@
             </a>
           </li>
           <li class="nav-item active ">
-            <a class="nav-link" href="sistema.php">
-              <i class="material-icons">perm_identity</i>
-              <p>Autores</p>
+            <a class="nav-link" href="searchAutor.php">
+              <i class="material-icons">person</i>
+              <p>Busqueda de Autores</p>
             </a>
           </li>
+
           <li class="nav-item active ">
-            <a class="nav-link" href="sistemaEditorial.php">
-              <i class="material-icons">account_balance</i>
-              <p>Editorial</p>
+            <a class="nav-link" href="searchLibro.php">
+              <i class="material-icons">person</i>
+              <p>Busqueda de Libros</p>
             </a>
           </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaSede.php">
-              <i class="material-icons">location_on</i>
-              <p>Sede</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaFuncionario.php">
-              <i class="material-icons">portrait</i>
-              <p>Funcionario</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaEstudiante.php">
-              <i class="material-icons">portrait</i>
-              <p>Estudiantes</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaModificados.php">
-              <i class="material-icons">portrait</i>
-              <p>Modificados</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaCorreo.php">
-              <i class="material-icons">email</i>
-              <p>Correo Est.</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaTelefono.php">
-              <i class="material-icons">local_phone</i>
-              <p>Telefono Est.</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaLibro.php">
-              <i class="material-icons">menu_book</i>
-              <p>Libro</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaPrestamo.php">
-              <i class="material-icons">beenhere</i>
-              <p>Prestamo</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaObsoleto.php">
-              <i class="material-icons">folder_delete</i>
-              <p>Libros Obsoletos</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaEspera.php">
-              <i class="material-icons">hourglass_empty</i>
-              <p>Lista de Espera</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaRegistro.php">
-              <i class="material-icons">app_registration</i>
-              <p>Registro</p>
-            </a>
-          </li>
+
         </ul>
       </div>
     </div>
     <div class="main-panel">
-      <!-- Navbar -->
+        <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
@@ -163,6 +106,7 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                  
                   <a class="dropdown-item" href="#">Johann, responde  a tus correos</a>
                   <a class="dropdown-item" href="#">Tienes 5 nuevas tareas</a>
                   <a class="dropdown-item" href="#">Ahora eres amigo de Andrew</a>
@@ -189,106 +133,151 @@
           </div>
         </div>
       </nav>
-      <div class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-                <!--- TABLA DE INGRESO DE DATO -->
-			
-             <!-- Muestrea de datos  -->
-             <div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Datos Modificados de Estudiante</h4>
-                  <p class="card-category"> </p>
-                </div>
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead class=" text-primary">
-                        
-                        <th>
-                          ID Estudiante
-                        </th>
-                        <th>
-                          Nombre Estudiante
-                        </th>                       
-                        <th>
-                          Usuario
-                        </th>   
-                        <th>
-                          Contraseña
-                        </th>     
-                        <th>
-                          Dirección
-                        </th>  
-                        <th>
-                          Fecha de Registro
-                        </th>    
-                        <th>
-                          Fecha de Modificación
-                        </th>                  
-                                     
-                        
-                      </thead>
-                      <tbody>
-                        <?php 
-                        	include 'conexion.php';
-                            $stid = oci_parse($conexion, 'SELECT * from MODIFICADOS');
-                            oci_execute($stid);
-                            while (($d = oci_fetch_array($stid, OCI_BOTH)) != false) {
-                                ?>
-                            <tr>
-                              
-                              <td>
-                                <?php echo $d['ID_ESTUDIANTE']; ?>
-                              </td>
-                              <td>
-                                <?php echo $d['NOMBRE_ESTUDIANTE']; ?>
-                              </td>
-                              <td>
-                                <?php echo $d['USUARIO']; ?>
-                              </td>
-                              <td>
-                              <?php echo $d['CONTRASENA']; ?>
-                              </td>
-                              <td>
-                                <?php echo $d['DIRECCION']; ?>
-                              </td>
-                              <td>
-                                <?php echo $d['FECHA_REGISTRO']; ?>
-                              </td>
-                              <td>
-                                <?php echo $d['MODIFICACION']; ?>
-                              </td>
-                              
-                              
-                              <td class="td-actions">
-						 
-							
-                          </td>
-                        </tr>
-                      </tbody>
-                      <?php 
-		}
-		?>   
-               </table>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <!-- End Navbar -->
 
-          </div>
+      <div>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+      <h2>Busqueda de Autores por nombre </h2>
+
+      </div>
+
+     
+     
+
+<?php 
+
+function get_input($first = "") 
+{
+  echo <<<END
+  
+
+  <div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header card-header-icon card-header-rose">
+        <div class="card-icon">
+          <i class="material-icons">language</i>
         </div>
       </div>
+      <div class="card-body">
+        <h4 class="card-title">Buscar Autor</h4>
+       
+        <form action="searchAutor.php" method="post">
+  Primer nombre:
+  <input type="text" name="first" value="$first">
+  <br>
+  
+  <input type="submit">
+  </form>
+
+      </div>
+    </div>
+  </div>
+
+
+END;
+} 
+
+if(!isset($_REQUEST['first'])) {
+   echo "<h6> Busque los autores en nuestra Biblioteca .
+         Aceptamos el nombre completo o la inicial.</h6> <br> "; 
+   get_input();
+}
+else {
+  // check whether the input fields are empty before continuing
+  if (empty($_REQUEST['first']) ) {
+    echo "You did not enter text in both 
+          fields, please re-enter the information.<p>"; 
+    get_input($_REQUEST['first']);
+  }
+  else {
+    // if text has been entered in both input fields, then
+    // create a database connection to Oracle XE using 
+    // password hr for user HR with a local connection to the XE database
+    $conn = oci_connect('ESTUDIANTE', '123', '//localhost/orcl');
+
+    // execute the function that calls the PL/SQL stored procedure 
+    $emp = get_employees($conn, $_REQUEST['first']);
+
+    // display results
+    print_results($emp, 'Información de Autores');
+
+    // close the database connection
+    oci_close($conn);
+  }
+} 
+
+// this functions calls a PL/SQL procedure that uses a ref cursor to fetch records
+function get_employees($conn, $firstname)
+{
+  // execute the call to the stored PL/SQL procedure
+  $sql = "BEGIN get_emp_info(:firstname,  :refcur); END;";
+  $stmt = oci_parse($conn, $sql);
+
+  // bind the first and last name variables
+  oci_bind_by_name($stmt, ':firstname', $firstname, 20);
+  
+
+  // bind the ref cursor
+  $refcur = oci_new_cursor($conn);
+  oci_bind_by_name($stmt, ':REFCUR', $refcur, -1, OCI_B_CURSOR);
+
+  // execute the statement
+  oci_execute($stmt);
+
+  // treat the ref cursor as a statement resource
+  oci_execute($refcur, OCI_DEFAULT);
+  oci_fetch_all($refcur, $employeerecords, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+
+  // return the results
+  return ($employeerecords);
+}
+
+// this function prints information in the returned records
+function print_results($returned_records, $report_title)
+{
+  echo '<h3>'.htmlentities($report_title).'</h3>';
+  if (!$returned_records) {
+    echo '<p>Ningún autor disponible</p>';
+  }
+  else {
+    echo '<table border="1">';
+    // print one row for each record retrieved
+    // put the fields of each record in separate table cells
+    foreach ($returned_records as $row) {
+      echo '<tr>';
+      foreach ($row as $field) {
+        print '<td>'.
+            ($field ? htmlentities($field) : '&nbsp;').'</td>';
+      }
+    }
+    echo '</table>';
+  }
+}
+
+?>
+
+
+
+
+
+
+
+
+
 
       <footer class="footer">
 
       </footer>
     </div>
   </div>
-
-  <!--   Core JS Files   -->
-  <script src="../assets/js/core/jquery.min.js"></script>
+<!--   Core JS Files   -->
+<script src="../assets/js/core/jquery.min.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
@@ -353,7 +342,7 @@
         }
 
         $('.fixed-plugin a').click(function (event) {
-          
+          // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
           if ($(this).hasClass('switch-trigger')) {
             if (event.stopPropagation) {
               event.stopPropagation();
@@ -487,12 +476,12 @@
             }, 300);
           }
 
-         
+          // we simulate the window Resize so the charts will get updated in realtime.
           var simulateWindowResize = setInterval(function () {
             window.dispatchEvent(new Event('resize'));
           }, 180);
 
-         
+          // we stop the simulation of Window Resize after the animations are completed
           setTimeout(function () {
             clearInterval(simulateWindowResize);
           }, 1000);
@@ -503,11 +492,11 @@
   </script>
   <script>
     $(document).ready(function () {
-      
+      // Javascript method's body can be found in assets/js/demos.js
       md.initDashboardPageCharts();
 
     });
   </script>
 </body>
 
-</html>          
+</html>

@@ -124,13 +124,13 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
-			<!--- tambah data -->
+			<!---  data -->
 			<?php
 				require_once 'conexion.php';
 				// verificar identificación
 				if (isset($_GET['id'])) {
 				  $id = $_GET['id'];
-				  // 	 obtener datos basados ​​en product_id
+				  // 	 obtener datos basados ​​en autor_id
 				  $stid = oci_parse($conexion,"SELECT * FROM AUTOR WHERE ID_AUTOR = '$id'");
 				  oci_execute($stid);
 				 while (($d = oci_fetch_array($stid, OCI_BOTH)) != false) {

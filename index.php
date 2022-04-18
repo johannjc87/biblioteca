@@ -58,7 +58,19 @@ while (oci_fetch($sumParse)) {
               </a>
             </li>
 
+            <li class="nav-item ">
+              <a class="nav-link" href="searchAutor.php">
+                <i class="material-icons">table_rows</i>
+                <p>Procedimientos</p>
+              </a>
+            </li>
 
+            <li class="nav-item ">
+              <a class="nav-link" href="funcionSalario.php">
+                <i class="material-icons">table_rows</i>
+                <p>Funciones</p>
+              </a>
+            </li>
 
           </ul>
         </div>
@@ -79,7 +91,7 @@ while (oci_fetch($sumParse)) {
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active">
         
-          <a class="nav-link" href="#">  <i class="material-icons">folder</i> <span class="sr-only">(current)</span>Home   </a>
+          <a class="nav-link" href="#">  <i class="material-icons">folder</i> <span class="sr-only">(current)</span>Home  </a>
         </li>
         <li class="nav-item">
        

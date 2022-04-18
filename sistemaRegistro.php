@@ -206,17 +206,12 @@
                     <table class="table">
                       <thead class=" text-primary">
                         <th>
-                          ID Registro
+                          Usuario
                         </th>
                         <th>
-                          ID Funcionario
+                          Fecha
                         </th>                       
-                        <th>
-                          ID Libro
-                        </th>   
-                        <th>
-                          Fecha 
-                        </th>     
+                         
                        
                                       
                                      
@@ -231,17 +226,12 @@
                                 ?>
                             <tr>
                               <td>
-                                <?php echo $d['ID_REGISTRO']; ?>
+                                <?php echo $d['USUARIO']; ?>
                               </td>
                               <td>
-                                <?php echo $d['ID_FUNCIONARIO']; ?>
+                                <?php echo $d['FECHA']; ?>
                               </td>
-                              <td>
-                                <?php echo $d['ID_LIBRO']; ?>
-                              </td>
-                              <td>
-                              <?php echo $d['FECHA']; ?>
-                              </td>
+                             
                              
                               
                               

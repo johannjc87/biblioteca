@@ -36,87 +36,49 @@
           <li class="nav-item">
             <a class="nav-link" href="index.php">
               <i class="material-icons">dashboard</i>
-              <p>Dashboard</p>
+              <p>Procedimiento </p>
             </a>
           </li>
           <li class="nav-item active ">
             <a class="nav-link" href="sistema.php">
               <i class="material-icons">perm_identity</i>
-              <p>Autores</p>
+              <p>Ejemplo 1</p>
             </a>
           </li>
           <li class="nav-item active ">
             <a class="nav-link" href="sistemaEditorial.php">
               <i class="material-icons">account_balance</i>
-              <p>Editorial</p>
+              <p>Ejemplo 2 </p>
             </a>
           </li>
+          
+         
           <li class="nav-item active ">
             <a class="nav-link" href="sistemaSede.php">
               <i class="material-icons">location_on</i>
-              <p>Sede</p>
+              <p>Ejemplo 3 </p>
             </a>
           </li>
           <li class="nav-item active ">
             <a class="nav-link" href="sistemaFuncionario.php">
               <i class="material-icons">portrait</i>
-              <p>Funcionario</p>
+              <p>Ejemplo 4 </p>
             </a>
           </li>
           <li class="nav-item active ">
             <a class="nav-link" href="sistemaEstudiante.php">
               <i class="material-icons">portrait</i>
-              <p>Estudiantes</p>
+              <p>Ejemplo 5 </p>
             </a>
           </li>
           <li class="nav-item active ">
             <a class="nav-link" href="sistemaModificados.php">
               <i class="material-icons">portrait</i>
-              <p>Modificados</p>
+              <p>Ejemplo 6</p>
             </a>
           </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaCorreo.php">
-              <i class="material-icons">email</i>
-              <p>Correo Est.</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaTelefono.php">
-              <i class="material-icons">local_phone</i>
-              <p>Telefono Est.</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaLibro.php">
-              <i class="material-icons">menu_book</i>
-              <p>Libro</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaPrestamo.php">
-              <i class="material-icons">beenhere</i>
-              <p>Prestamo</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaObsoleto.php">
-              <i class="material-icons">folder_delete</i>
-              <p>Libros Obsoletos</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaEspera.php">
-              <i class="material-icons">hourglass_empty</i>
-              <p>Lista de Espera</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaRegistro.php">
-              <i class="material-icons">app_registration</i>
-              <p>Registro</p>
-            </a>
-          </li>
+          
+
         </ul>
       </div>
     </div>
@@ -194,83 +156,48 @@
           <div class="row">
             <div class="col-md-12">
                 <!--- TABLA DE INGRESO DE DATO -->
+			<form class="form-horizontal" action="bdPAautorlibro.php" method="post">
+			 <div class="form-row">
+				<div class="form-group col-md-6">
+				  <label for="">ID Autor que se desea buscar</label>
+				  <input type="text" class="form-control" name="ID_AUTOR" >
+				</div>
 			
+			  		
+        
+				<div class="form-group">
+					<label class="col-sm-3 control-label"></label>
+					<div class="col-sm-6">
+						<input type="submit" name="submit" class="btn btn-sm btn-success" value="submit">						
+					</div>
+				</div>
+			</form>
              <!-- Muestrea de datos  -->
              <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Datos Modificados de Estudiante</h4>
+                  <h4 class="card-title ">Datos de Autor</h4>
                   <p class="card-category"> </p>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
                     <table class="table">
                       <thead class=" text-primary">
-                        
                         <th>
-                          ID Estudiante
+                          Nombre de autor 
                         </th>
                         <th>
-                          Nombre Estudiante
+                          Libro de autor 
                         </th>                       
-                        <th>
-                          Usuario
-                        </th>   
-                        <th>
-                          Contraseña
-                        </th>     
-                        <th>
-                          Dirección
-                        </th>  
-                        <th>
-                          Fecha de Registro
-                        </th>    
-                        <th>
-                          Fecha de Modificación
-                        </th>                  
-                                     
-                        
+                                              
+                                          
+                       
                       </thead>
                       <tbody>
-                        <?php 
-                        	include 'conexion.php';
-                            $stid = oci_parse($conexion, 'SELECT * from MODIFICADOS');
-                            oci_execute($stid);
-                            while (($d = oci_fetch_array($stid, OCI_BOTH)) != false) {
-                                ?>
-                            <tr>
-                              
-                              <td>
-                                <?php echo $d['ID_ESTUDIANTE']; ?>
-                              </td>
-                              <td>
-                                <?php echo $d['NOMBRE_ESTUDIANTE']; ?>
-                              </td>
-                              <td>
-                                <?php echo $d['USUARIO']; ?>
-                              </td>
-                              <td>
-                              <?php echo $d['CONTRASENA']; ?>
-                              </td>
-                              <td>
-                                <?php echo $d['DIRECCION']; ?>
-                              </td>
-                              <td>
-                                <?php echo $d['FECHA_REGISTRO']; ?>
-                              </td>
-                              <td>
-                                <?php echo $d['MODIFICACION']; ?>
-                              </td>
-                              
-                              
-                              <td class="td-actions">
-						 
-							
-                          </td>
-                        </tr>
-                      </tbody>
-                      <?php 
-		}
-		?>   
+                  
+
+
+
+
                </table>
                   </div>
                 </div>

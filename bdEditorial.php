@@ -16,13 +16,13 @@ if (isset($_POST['submit'])) {
 	$r = oci_execute($statement,OCI_DEFAULT);
 	 $res = oci_commit($conexion);
   if ($res) {
-    // pesan jika data berubah
-    echo "<script>alert('Data Stok Obat berhasil diubah'); window.location.href='sistemaEditorial.php'</script>";
+    
+    echo "<script>alert('Datos agregados con exito'); window.location.href='sistemaEditorial.php'</script>";
   } else {
-    // pesan jika data gagal diubah
-    echo "<script>alert('Data Stok Obat gagal diubah'); window.location.href='sistemaEditorial.php'</script>";
+    
+    echo "<script>alert('Hubo un problemas con los datos'); window.location.href='sistemaEditorial.php'</script>";
   }
 } else {
-  // jika coba akses langsung halaman ini akan diredirect ke halaman index
+  
   header('Location: sistemaEditorial.php'); 
 }

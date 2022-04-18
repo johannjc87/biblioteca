@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Biblioteca Tecnólogica
+   Biblioteca
   </title>
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -22,11 +22,11 @@
 
 <body class="">
   <div class="wrapper ">
-    <div class="sidebar" data-color="green" data-background-color="white" data-image="assets/img/sidebar-1.jpg">
+    <div class="sidebar" data-color="azure" data-background-color="white" data-image="assets/img/sidebar-1.jpg">
       <!--
-        Tip 1: Se puede cambiar el color de la barra lateral data-color="purple | azure | green | orange | danger"
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
-        Tip 2: Se puede agregar una imagen usando  data-image tag
+        Tip 2: you can also add an image using data-image tag
     -->
       <div class="logo"><a href="http://www.creative-tim.com" class="simple-text logo-normal">
           Biblioteca
@@ -41,87 +41,16 @@
           </li>
           <li class="nav-item active ">
             <a class="nav-link" href="sistema.php">
-              <i class="material-icons">perm_identity</i>
-              <p>Autores</p>
+              <i class="material-icons">person</i>
+              <p>Datos de ingreso</p>
             </a>
           </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaEditorial.php">
-              <i class="material-icons">account_balance</i>
-              <p>Editorial</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaSede.php">
-              <i class="material-icons">location_on</i>
-              <p>Sede</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaFuncionario.php">
-              <i class="material-icons">portrait</i>
-              <p>Funcionario</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaEstudiante.php">
-              <i class="material-icons">portrait</i>
-              <p>Estudiantes</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaModificados.php">
-              <i class="material-icons">portrait</i>
-              <p>Modificados</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaCorreo.php">
-              <i class="material-icons">email</i>
-              <p>Correo Est.</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaTelefono.php">
-              <i class="material-icons">local_phone</i>
-              <p>Telefono Est.</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaLibro.php">
-              <i class="material-icons">menu_book</i>
-              <p>Libro</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaPrestamo.php">
-              <i class="material-icons">beenhere</i>
-              <p>Prestamo</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaObsoleto.php">
-              <i class="material-icons">folder_delete</i>
-              <p>Libros Obsoletos</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaEspera.php">
-              <i class="material-icons">hourglass_empty</i>
-              <p>Lista de Espera</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="sistemaRegistro.php">
-              <i class="material-icons">app_registration</i>
-              <p>Registro</p>
-            </a>
-          </li>
+
         </ul>
       </div>
     </div>
     <div class="main-panel">
-      <!-- Navbar -->
+        <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
@@ -163,6 +92,7 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                  
                   <a class="dropdown-item" href="#">Johann, responde  a tus correos</a>
                   <a class="dropdown-item" href="#">Tienes 5 nuevas tareas</a>
                   <a class="dropdown-item" href="#">Ahora eres amigo de Andrew</a>
@@ -189,92 +119,73 @@
           </div>
         </div>
       </nav>
+      <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
-                <!--- TABLA DE INGRESO DE DATO -->
+			<!--- tambah data -->
+			<?php
+				require_once 'conexion.php';
+				// verificar identificación
+				if (isset($_GET['id'])) {
+				  $id = $_GET['id'];
+				  // 	 obtener datos basados ​​en product_id
+				  $stid = oci_parse($conexion,"SELECT * FROM ESTUDIANTE WHERE ID_ESTUDIANTE = '$id'");
+				  oci_execute($stid);
+				 while (($d = oci_fetch_array($stid, OCI_BOTH)) != false) {
+				  ?>
+
+<form class="form-horizontal" action="bdAutorlibro.php" method="post">
+			 <div class="form-row">
 			
-             <!-- Muestrea de datos  -->
-             <div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Datos Modificados de Estudiante</h4>
-                  <p class="card-category"> </p>
-                </div>
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead class=" text-primary">
-                        
-                        <th>
-                          ID Estudiante
-                        </th>
-                        <th>
-                          Nombre Estudiante
-                        </th>                       
-                        <th>
-                          Usuario
-                        </th>   
-                        <th>
-                          Contraseña
-                        </th>     
-                        <th>
-                          Dirección
-                        </th>  
-                        <th>
-                          Fecha de Registro
-                        </th>    
-                        <th>
-                          Fecha de Modificación
-                        </th>                  
-                                     
-                        
-                      </thead>
-                      <tbody>
-                        <?php 
-                        	include 'conexion.php';
-                            $stid = oci_parse($conexion, 'SELECT * from MODIFICADOS');
-                            oci_execute($stid);
-                            while (($d = oci_fetch_array($stid, OCI_BOTH)) != false) {
-                                ?>
-                            <tr>
-                              
-                              <td>
-                                <?php echo $d['ID_ESTUDIANTE']; ?>
-                              </td>
-                              <td>
-                                <?php echo $d['NOMBRE_ESTUDIANTE']; ?>
-                              </td>
-                              <td>
-                                <?php echo $d['USUARIO']; ?>
-                              </td>
-                              <td>
-                              <?php echo $d['CONTRASENA']; ?>
-                              </td>
-                              <td>
-                                <?php echo $d['DIRECCION']; ?>
-                              </td>
-                              <td>
-                                <?php echo $d['FECHA_REGISTRO']; ?>
-                              </td>
-                              <td>
-                                <?php echo $d['MODIFICACION']; ?>
-                              </td>
-                              
-                              
-                              <td class="td-actions">
-						 
-							
-                          </td>
-                        </tr>
-                      </tbody>
-                      <?php 
-		}
-		?>   
-               </table>
-                  </div>
-                </div>
-              </div>
+       <input type="text" class="form-control" name="id_estudiante" value="<?= $d['ID_ESTUDIANTE'] ?>" >
+
+               
+				
+<div class="form-group col-md-6">
+  <label for="">Nombre Estudiante</label>
+  <input type="text" class="form-control" name="nombre_estudiante" value="<?= $d['NOMBRE_ESTUDIANTE'] ?>">
+</div>
+</div>
+<div class="form-row">
+			  <div class="form-group col-md-6">
+				  <label for="">Usuario</label>
+				  <input type="text" class="form-control" name="usuario" value="<?= $d['USUARIO'] ?>">
+				</div>				
+			  </div>	
+
+<div class="form-row">
+			  <div class="form-group col-md-6">
+				  <label for="">Contraseña</label>
+				  <input type="text" class="form-control" name="contrasena" value="<?= $d['CONTRASENA'] ?>">
+				</div>				
+			  </div>	
+              <div class="form-row">
+			  <div class="form-group col-md-6">
+				  <label for="">Direccion</label>
+				  <input type="text" class="form-control" name="direccion" value="<?= $d['DIRECCION'] ?>">
+				</div>				
+			  </div>	
+              <div class="form-row">
+			  <div class="form-group col-md-6">
+				  <label for="">Fecha de Registro</label>
+				  <input type="text" class="form-control" name="fecha_registro" value="<?= $d['FECHA_REGISTRO'] ?>">
+				</div>				
+			  </div>	
+        
+        																										
+				<div class="form-group">
+					<label class="col-sm-3 control-label"></label>
+					<div class="col-sm-6">
+          <input type="submit" name="submit" class="btn btn-sm btn-primary" value="Update">
+            
+					</div>
+				</div>
+			</form>
+				 <?php }
+				}				 ?>
+              
             </div>
 
           </div>
@@ -286,9 +197,8 @@
       </footer>
     </div>
   </div>
-
-  <!--   Core JS Files   -->
-  <script src="../assets/js/core/jquery.min.js"></script>
+<!--   Core JS Files   -->
+<script src="../assets/js/core/jquery.min.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
@@ -353,7 +263,7 @@
         }
 
         $('.fixed-plugin a').click(function (event) {
-          
+          // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
           if ($(this).hasClass('switch-trigger')) {
             if (event.stopPropagation) {
               event.stopPropagation();
@@ -487,12 +397,12 @@
             }, 300);
           }
 
-         
+          // we simulate the window Resize so the charts will get updated in realtime.
           var simulateWindowResize = setInterval(function () {
             window.dispatchEvent(new Event('resize'));
           }, 180);
 
-         
+          // we stop the simulation of Window Resize after the animations are completed
           setTimeout(function () {
             clearInterval(simulateWindowResize);
           }, 1000);
@@ -503,11 +413,11 @@
   </script>
   <script>
     $(document).ready(function () {
-      
+      // Javascript method's body can be found in assets/js/demos.js
       md.initDashboardPageCharts();
 
     });
   </script>
 </body>
 
-</html>          
+</html>
