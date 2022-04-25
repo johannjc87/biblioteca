@@ -59,16 +59,16 @@ INSERT INTO ESTUDIANTE VALUES (01,'Joe Pesci','JPesci01','jpesci01','Missisipi R
 INSERT INTO ESTUDIANTE VALUES (02,'Connor Dawg','CdawgVA','CdawgVA','Londres',DATE '2021-04-03');
 
 CREATE TABLE MODIFICADOS(
-        ID_MODIFICADOS NUMBER(2) NOT NULL, --PH
+        
 	ID_ESTUDIANTE NUMBER(2) NOT NULL, --FK
 	NOMBRE_ESTUDIANTE VARCHAR2(200) NOT NULL, 
 	USUARIO VARCHAR2(200) NOT NULL, 
 	CONTRASENA VARCHAR2(200) NOT NULL,
 	DIRECCION VARCHAR2(200) NOT NULL, 
 	FECHA_REGISTRO DATE,
-    MODIFICACION DATE,
-    PRIMARY KEY (ID_MODIFICADOS),
-    FOREIGN KEY (ID_ESTUDIANTE) REFERENCES ESTUDIANTE (ID_ESTUDIANTE)
+        MODIFICACION DATE,
+   
+   
 );
 
 INSERT INTO MODIFICADOS VALUES (90, 02,'Connor Dawg','CdawgVA','CdawgVA','Londres',DATE '2021-04-03', DATE '2022-04-02' );
@@ -168,15 +168,240 @@ CREATE TABLE LISTA_ESPERA(
 );
 
 CREATE TABLE REGISTRO_LIBRO(
-	ID_REGISTRO NUMBER(4) NOT NULL, --PK
-    ID_FUNCIONARIO NUMBER(2) NOT NULL, --FK
-    ID_LIBRO NUMBER(4) NOT NULL, --FK
-    FECHA DATE,
-    PRIMARY KEY (ID_REGISTRO),
-    FOREIGN KEY (ID_LIBRO) REFERENCES LIBRO (ID_LIBRO),
-	FOREIGN KEY (ID_FUNCIONARIO) REFERENCES FUNCIONARIO (ID_FUNCIONARIO)
+    USUARIO VARCHAR2(30),
+    FECHA DATE
+    
 );
 
 SELECT * FROM AUTOR;
 SELECT * FROM EDITORIAL;
 SELECT * FROM SEDE;
+
+
+------------
+PROCEDIMIENTO ALMACENADO 1:
+Muestra el nombre del autor con el titulo del libro
+
+create or replace procedure p_consulta_libro(idlibro in number )
+as
+
+obra varchar2(200);
+autor varchar2(50);
+valores varchar2(200);
+
+BEGIN
+select  L.TITULO, A.NOMBRE_AUTOR into obra, autor 
+from LIBRO L, AUTOR A
+where L.ID_LIBRO = idlibro  AND A.ID_AUTOR = L.ID_AUTOR ;
+valores:=concat(concat(obra,' '),autor);
+
+DBMS_OUTPUT.PUT_LINE('El libro es... '||valores);
+end;
+
+--ejecución---
+
+set serveroutput on
+BEGIN 
+p_consulta_libro(0111);
+END;
+
+
+
+
+------
+PROCEDIMIENTO ALMACENADO 2:
+
+create or replace procedure p_consulta_prestamo(idestudiante in number )
+as
+nombre varchar2(200);
+obra varchar2(200);
+valores varchar2(400);
+
+BEGIN
+select  A.NOMBRE_ESTUDIANTE, L.TITULO into nombre, obra 
+from ESTUDIANTE A, PRESTAMO P, LIBRO L
+where A.ID_ESTUDIANTE = idestudiante  AND A.ID_ESTUDIANTE = P.ID_ESTUDIANTE AND P.ID_LIBRO = L.ID_LIBRO ;
+valores:=concat(concat(nombre,' saco el siguiente libro:  '),obra);
+
+DBMS_OUTPUT.PUT_LINE('El alumnno : '||valores);
+end;
+
+----ejecucion---
+
+set serveroutput on
+BEGIN 
+p_consulta_prestamo(01);
+END;
+
+------------------
+PROCEDIMIENTO ALMACENADO 3:
+
+que busca por las iniciales a un autor.
+
+CREATE OR REPLACE PROCEDURE get_emp_info (firstname IN VARCHAR2,
+   emp_cursor IN OUT my_var_pkg.my_refcur_typ) AS
+BEGIN
+-- the following returns employee info based on first and last names
+  OPEN emp_cursor FOR SELECT ID_AUTOR, NOMBRE_AUTOR FROM AUTOR 
+    WHERE SUBSTR(UPPER(NOMBRE_AUTOR), 1, LENGTH(firstname)) = UPPER(firstname);
+END get_emp_info;
+/
+
+
+
+-----------------
+
+TRIGGER 1: GUARDA EL USUARIO Y LA FECHA EN LA TABLA REGISTRO_LIBRO
+
+CREATE OR REPLACE TRIGGER INGRESOLIBROS
+BEFORE INSERT 
+ON LIBRO
+BEGIN
+INSERT INTO REGISTRO_LIBRO VALUES (USER, SYSDATE);
+END INGRESOLIBROS;
+
+PARA LLAMARLO
+
+SELECT * FROM REGISTRO_LIBRO;
+
+---------
+trigger 2: guarda los datos viejos en una tabla modificados que es una tabla de backup 
+
+
+CREATE OR REPLACE TRIGGER COPIA
+AFTER UPDATE ON ESTUDIANTE
+FOR EACH ROW
+BEGIN
+INSERT INTO MODIFICADOS VALUES (:OLD.ID_ESTUDIANTE, :OLD.NOMBRE_ESTUDIANTE,
+:OLD.USUARIO, :OLD.CONTRASENA, :OLD.DIRECCION, :OLD.FECHA_REGISTRO, SYSDATE);
+END COPIA;
+
+----
+FUNCION 1: CALCULA AUMENTA EL SALARIO DE UN FUNCIONARIO POR 500 DOLARES AL COLOCAR EL ID
+
+
+CREATE OR REPLACE FUNCTION AUMENTAR_SALARIO (S1 NUMBER, AUN NUMBER) RETURN NUMBER
+IS
+BEGIN 
+RETURN S1 + AUN;
+END;
+
+SE EJECUTA-----
+SELECT AUMENTAR_SALARIO(salario,500) FROM FUNCIONARIO WHERE id_funcionario = 11;
+
+------
+FUNCION 2: DETERMINA A LAS PERSONAS QUE GANEN MAS DE 1500 DOLARES, QUE DEBE PAGAR IMPUESTO SOBRE
+LA RENTA
+
+CREATE OR REPLACE FUNCTION ISLR(VALOR NUMBER)
+RETURN VARCHAR
+IS
+IMPUESTO VARCHAR2(20);
+ BEGIN
+ IMPUESTO :='';
+ IF VALOR >=1500 THEN
+ IMPUESTO := 'PAGA ISLR';
+ ELSE IMPUESTO := 'NO PAGA ISLR';
+ END IF;
+ RETURN IMPUESTO;
+ END;
+
+--SE EJECUTA
+ SELECT ID_FUNCIONARIO, NOMBRE_FUNCIONARIO, SALARIO, ISLR(SALARIO) FROM FUNCIONARIO;
+
+FUNCION 3: DETERMINE EL PORCENTAJE DE SUELDO QUE SE PAGA POR CSS
+
+CREATE OR REPLACE FUNCTION CSS(VALOR NUMBER)
+RETURN NUMBER
+IS
+IMPUESTO NUMBER;
+ BEGIN
+ IMPUESTO := VALOR * 0.15;
+ RETURN IMPUESTO;
+ END;
+
+SELECT ID_FUNCIONARIO, NOMBRE_FUNCIONARIO, SALARIO, CSS(SALARIO) FROM FUNCIONARIO;
+
+-----
+PAQUETE 1: COLOCAMOS EL NOMBRE DEL AUTOR Y NOS CONFIRMA SI TENEMOS EL NOMBRE DE ESE AUTOR. 
+
+SE EJECUTA PRIMERO
+---creacion de especificacion de paquete----
+create or replace package  busqueda as
+procedure caracter (nombreautor autor.nombre_autor%TYPE);
+END busqueda;
+
+SE EJECUTA DE SEGUNDO
+--creacion de body---
+create or replace package body busqueda as
+procedure caracter (nombreautor autor.nombre_autor%TYPE) IS
+nameautor AUTOR.NOMBRE_AUTOR%TYPE;
+BEGIN
+SELECT NOMBRE_AUTOR INTO nameautor
+FROM AUTOR WHERE AUTOR.NOMBRE_AUTOR = NOMBREAUTOR;
+dbms_output.put_line('Busqueda exitosa, si tenemos libros del autor:..'||nameautor);
+END caracter;
+END busqueda;
+
+SE EJECUTA DE TERCERO
+set serveroutput on
+BEGIN
+busqueda.caracter('Stephen Hawkings');
+end;
+
+------
+
+PAQUETE 2: SE CREA UN PAQUETE PARA DETERMINAR SI EL NOMBRE DE LIBRO SE ENCUENTRA EN LA BIBLIOTECA Y SI SE ENCUENTRA DISPONIBLE.
+---creacion de especificacion de paquete----
+create or replace package  search as
+procedure opcion (nombrelibro libro.TITULO%TYPE);
+END search;
+
+
+--creacion de body---
+create or replace package body search as
+procedure opcion (nombrelibro libro.TITULO%TYPE) IS
+namebook LIBRO.TITULO%TYPE;
+ave LIBRO.DISPONIBILIDAD%TYPE;
+BEGIN
+SELECT TITULO, DISPONIBILIDAD INTO namebook, ave
+FROM LIBRO WHERE LIBRO.TITULO = NOMBRELIBRO;
+dbms_output.put_line('Busqueda exitosa, El libro se encuentra en la Biblioteca :..'||namebook);
+dbms_output.put_line('1 si se encuentra disponible 0 agotado:..'||ave);
+END opcion;
+END search;
+
+
+set serveroutput on
+BEGIN
+search.opcion('Como programar en JAVA');
+end;
+
+
+CURSOR : 
+CURSOR QUE MUESTRA LOS LIBROS POR TECNOLOGIA PROGRAMACION 
+
+DECLARE
+V_ID LIBRO.ID_LIBRO%TYPE;
+V_TITULO LIBRO.TITULO%TYPE;
+V_TECNOLOGIA LIBRO.TECNOLOGIA%TYPE;
+
+CURSOR LIBROS_TECNOLOGIA IS
+SELECT ID_LIBRO, TITULO, TECNOLOGIA
+FROM LIBRO L
+WHERE TECNOLOGIA = 'programacion';
+BEGIN
+OPEN LIBROS_TECNOLOGIA;
+LOOP
+FETCH LIBROS_TECNOLOGIA INTO V_ID, V_TITULO, V_TECNOLOGIA;
+EXIT WHEN LIBROS_TECNOLOGIA%NOTFOUND;
+
+DBMS_OUTPUT.PUT_LINE(V_ID ||'-' ||V_TITULO ||'-' ||V_TECNOLOGIA);
+
+END LOOP;
+
+CLOSE LIBROS_TECNOLOGIA;
+
+END;
+
+
